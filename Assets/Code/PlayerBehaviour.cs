@@ -14,7 +14,6 @@ public class PlayerBehaviour : MonoBehaviour
 
     [Header("Character Run")]
     [SerializeField] private float moveSpeed = 5f;
-    private float originalScaleX;
     private float moveInput;
 
     [Header("Character Jump")]
@@ -52,7 +51,6 @@ public class PlayerBehaviour : MonoBehaviour
         if (animator == null) Debug.LogError("Animator not assigned!");
 
         playerHalfHeight = spriteRenderer.bounds.extents.y;
-        originalScaleX = transform.localScale.x;
 
         // Set initial position
         Vector3 startPosition = transform.position;
@@ -115,8 +113,7 @@ public class PlayerBehaviour : MonoBehaviour
         // Handle sprite flipping
         if (direction != 0)
         {
-            float scaleX = Mathf.Abs(originalScaleX) * Mathf.Sign(direction);
-            transform.localScale = new Vector3(scaleX, originalScaleX, 1);
+            spriteRenderer.flipX = direction < 0;
         }
     }
 
